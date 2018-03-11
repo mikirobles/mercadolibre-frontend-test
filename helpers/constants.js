@@ -22,13 +22,6 @@ const STYLE_VARS = {
     }
 }
 
-const API_CONFIG = {
-    getSearchItemsUrl: ({query}) => `https://api.mercadolibre.com/sites/MLA/search?q=${query}`,
-    getItemDetailsUrl: ({itemId}) => `https://api.mercadolibre.com/items/${itemId}`,
-    getItemDescriptionUrl: ({itemId}) => `https://api.mercadolibre.com/items/${itemId}/description`,
-}
-
 module.exports = {
-    STYLE_VARS,
-    API_CONFIG
+    STYLE_VARS
 }

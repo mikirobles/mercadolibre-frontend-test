@@ -1,40 +1,44 @@
 const axios = require('axios');
-const { API_CONFIG } = require('./constants');
-
-const flatten = arr => [].concat.apply([], arr);
-
-const formatItem = data => ({
-    id: data.id,
-    title: data.title,
-    price: {
-        currency: data['currency_id'],
-        amount: data.price,
-        decimals:
-            String(data.price).split('.').length === 2
-                ? Number(String(data.price).split('.')[1])
-                : 0,
-    },
-    picture: data.thumbnail,
-    condition: data.condition,
-    free_shipping: data.shipping['free_shipping'],
-});
 
 const author = {
     name: 'Micael',
     lastname: 'Robles',
 };
 
+const getSearchItemsUrl = ({ query }) =>
+    `https://api.mercadolibre.com/sites/MLA/search?q=${query}`;
+const getItemDetailsUrl = ({ itemId }) =>
+    `https://api.mercadolibre.com/items/${itemId}`;
+const getItemDescriptionUrl = ({ itemId }) =>
+    `https://api.mercadolibre.com/items/${itemId}/description`;
+
+const flatten = arr => [].concat.apply([], arr);
+
+const formatItem = rawData => ({
+    id: rawData.id,
+    title: rawData.title,
+    price: {
+        currency: rawData['currency_id'],
+        amount: rawData.price,
+        decimals:
+            String(rawData.price).split('.').length === 2
+                ? Number(String(rawData.price).split('.')[1])
+                : 0,
+    },
+    picture: rawData.thumbnail,
+    condition: rawData.condition,
+    free_shipping: rawData.shipping['free_shipping'],
+});
+
 const searchItems = async ({ query }) => {
     try {
-        const resultsData = (await axios.get(
-            API_CONFIG.getSearchItemsUrl({ query }),
-        )).data;
+        const resultsData = (await axios.get(getSearchItemsUrl({ query })))
+            .data;
 
         let categories = [];
         const categoryObj = resultsData.filters.find(
             filter => filter.id === 'category',
         );
-
         if (categoryObj) {
             categories = flatten(
                 categoryObj.values.map(category =>
@@ -44,7 +48,6 @@ const searchItems = async ({ query }) => {
                 ),
             );
         }
-
         const items = resultsData.results.slice(0, 4).map(formatItem);
 
         return {
@@ -63,8 +66,8 @@ const searchItems = async ({ query }) => {
 const getItem = async ({ itemId }) => {
     try {
         const [detailsResponse, descriptionResponse] = await Promise.all([
-            axios.get(API_CONFIG.getItemDetailsUrl({ itemId })),
-            axios.get(API_CONFIG.getItemDescriptionUrl({ itemId })),
+            axios.get(getItemDetailsUrl({ itemId })),
+            axios.get(getItemDescriptionUrl({ itemId })),
         ]);
 
         const details = detailsResponse.data;
@@ -80,7 +83,7 @@ const getItem = async ({ itemId }) => {
             author,
             item,
         };
-    } catch(err) {
+    } catch (err) {
         return {
             error: err.response.data.message,
         };

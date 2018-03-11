@@ -6,21 +6,12 @@ const app = next({
     dev: process.env.NODE_ENV !== 'production' && !process.env.NOW,
 });
 const handle = app.getRequestHandler();
-
-const { getItem, searchItems } = require('./helpers/api');
+const api = require("./api")
 
 app.prepare().then(() => {
     const server = express();
 
-    server.get('/api/items', async (req, res) => {
-        res.json(
-            await searchItems({ query: req.query['q'] ? req.query['q'] : '' }),
-        );
-    });
-
-    server.get('/api/items/:id', async (req, res) => {
-        res.json(await getItem({ itemId: req.params.id }));
-    });
+    server.use('/api', api);
 
     server.get('*', (req, res) => {
         return handle(req, res);
