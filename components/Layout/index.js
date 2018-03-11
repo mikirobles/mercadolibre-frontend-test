@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import SearchBox from 'components/SearchBox';
 import ErrorMessage from 'components/ErrorMessage';
 import { styleConstants } from 'helpers/index';
+import search from "../../pages/search";
 
 const { colors } = styleConstants;
 
@@ -22,9 +23,9 @@ const LayoutWrapper = styled.div`
     }
 `;
 
-export default ({ children, error }) => (
+export default ({ children, error, searchValue }) => (
     <LayoutWrapper>
-        <SearchBox />
+        <SearchBox initialValue={searchValue} />
         <article>
             {error ? ErrorMessage({ error }) : null}
             {children}

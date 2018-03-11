@@ -28,7 +28,7 @@ export default class extends React.Component {
     }
     render() {
         return (
-            <Layout error={this.props.error}>
+            <Layout searchValue={this.props.searchInput} error={this.props.error}>
                 <Head>
                     <title>{`${capitalize(
                         this.props.searchInput,

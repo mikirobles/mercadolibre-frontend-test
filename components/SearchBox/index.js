@@ -50,10 +50,10 @@ const SearchBoxWrapper = styled.header`
 `;
 
 export default class extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            inputValue: '',
+            inputValue: this.props.initialValue || '',
             canSearch: false,
         };
     }
