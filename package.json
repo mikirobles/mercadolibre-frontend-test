@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Test práctico de front end para Mercado Libre.",
   "main": "index.js",
-  "alias": "mercadolibre-frontend-test.now.sh",
+  "now": {
+    "alias": "https://mercadolibre-frontend-test.now.sh"
+  },
   "scripts": {
     "dev": "node $NODE_DEBUG_OPTION server.js",
     "build": "next build",

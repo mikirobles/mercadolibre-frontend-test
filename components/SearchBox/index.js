@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
+import Link from 'next/link';
+import Router from 'next/router';
 import { styleConstants } from 'helpers/index';
 
 const { colors } = styleConstants;
@@ -52,19 +54,21 @@ export default class extends React.Component {
         super();
         this.state = {
             inputValue: '',
+            canSearch: false,
         };
     }
 
     onInputChange = e => {
         this.setState({
             inputValue: e.target.value,
+            canSearch: !!e.target.value,
         });
     };
 
     search = () => {
         const { inputValue } = this.state;
         if (inputValue) {
-            window.location.replace(`/items?search=${inputValue}`)
+            Router.push(`/items?search=${inputValue}`);
         }
     };
 
@@ -72,27 +76,29 @@ export default class extends React.Component {
         return (
             <SearchBoxWrapper>
                 <div className="nav-inner">
-                    <a href="/">
-                        <img
-                            className="logo"
-                            src="../static/images/Logo_ML@2x.png"
-                            alt="Ir a Home"
-                        />
-                    </a>
+                    <Link href="/">
+                        <a>
+                            <img
+                                className="logo"
+                                src="https://tocklify.sirv.com/mercadolibre/Logo_ML%402x.png"
+                                alt="Ir a Home"
+                            />
+                        </a>
+                    </Link>
 
                     <div className="input-bar">
                         <input
                             placeholder="Nunca dejes de buscar"
                             type="text"
-                            onKeyPress={(e) => {
-                                if (e.charCode === 13) this.search()
+                            onKeyPress={e => {
+                                if (e.charCode === 13) this.search();
                             }}
                             onChange={this.onInputChange}
                             value={this.state.inputValue}
                         />
                         <button onClick={this.search}>
                             <img
-                                src="../static/images/ic_Search@2x.png"
+                                src="https://tocklify.sirv.com/mercadolibre/ic_Search%402x.png"
                                 alt="Buscar"
                             />
                         </button>

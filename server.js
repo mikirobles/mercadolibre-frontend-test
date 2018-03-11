@@ -6,24 +6,30 @@ const app = next({
     dev: process.env.NODE_ENV !== 'production' && !process.env.NOW,
 });
 const handle = app.getRequestHandler();
-const api = require("./api")
+const api = require('./api');
 
 app.prepare().then(() => {
     const server = express();
+
+    server.use(
+        express.static('/static/images', {
+            maxage: '3600000',
+        }),
+    );
 
     server.use('/api', api);
 
     server.get('/items', (req, res) => {
         if (req.query.search) {
-            return app.render(req, res, '/search')
+            return app.render(req, res, '/search');
         } else {
-            next()
+            next();
         }
-    })
+    });
 
     server.get('/items/:id', (req, res) => {
-        return app.render(req, res, '/item')
-    })
+        return app.render(req, res, '/item');
+    });
 
     server.get('*', (req, res) => {
         return handle(req, res);

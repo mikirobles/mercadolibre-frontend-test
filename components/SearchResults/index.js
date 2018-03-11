@@ -10,11 +10,11 @@ const SearchResultsWrapper = styled.ul`
     margin: auto;
     font-size: 14px;
     a {
-      color: inherit;
-      text-decoration: none;
-      &:hover {
-        color: gray;
-      }
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+            color: gray;
+        }
     }
     .product {
         background: white;
@@ -110,20 +110,22 @@ export default ({ results }) => (
                     </a>
                 </div>
                 <div className="details">
-                    <div
-                        className={`price ${
-                            product['free_shipping'] ? 'free-shipping' : ''
-                        }`}
-                        aria-label={
-                            product['free_shipping'] ? 'Envío gratis' : ''
-                        }
-                    >
-                        <span>
-                            {formattingHelpers.formatMoney(
-                                product.price.amount,
-                            )}
-                        </span>
-                    </div>
+                    <a href={`/items/${product.id}`}>
+                        <div
+                            className={`price ${
+                                product['free_shipping'] ? 'free-shipping' : ''
+                            }`}
+                            aria-label={
+                                product['free_shipping'] ? 'Envío gratis' : ''
+                            }
+                        >
+                            <span>
+                                {formattingHelpers.formatMoney(
+                                    product.price.amount,
+                                )}
+                            </span>
+                        </div>
+                    </a>
                     <a href={`/items/${product.id}`}>
                         <h1>{product.title}</h1>
                     </a>

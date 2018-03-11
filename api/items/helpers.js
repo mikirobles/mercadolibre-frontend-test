@@ -11,7 +11,7 @@ const getLongest = (...args) =>
     });
 
 const getSearchItemsUrl = ({ query }) =>
-    `https://api.mercadolibre.com/sites/MLA/search?q=${query}`;
+    `https://api.mercadolibre.com/sites/MLA/search?q=${encodeURI(query)}`;
 const getItemDetailsUrl = ({ itemId }) =>
     `https://api.mercadolibre.com/items/${itemId}`;
 const getItemDescriptionUrl = ({ itemId }) =>
