@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Test práctico de front end para Mercado Libre.",
   "main": "index.js",
+  "alias": "mercadolibre-frontend-test.now.sh",
   "scripts": {
     "dev": "node $NODE_DEBUG_OPTION server.js",
     "build": "next build",
@@ -11,6 +12,7 @@
   "author": "Micael Robles",
   "license": "ISC",
   "dependencies": {
+    "accounting": "^0.4.1",
     "axios": "^0.18.0",
     "babel-plugin-module-resolver": "^3.1.0",
     "babel-plugin-styled-components": "^1.5.1",

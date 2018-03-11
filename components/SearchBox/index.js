@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 import React from 'react';
-import { STYLE_VARS } from 'helpers/constants';
+import { styleConstants } from 'helpers/index';
 
-const { colors } = STYLE_VARS;
+const { colors } = styleConstants;
 
 const SearchBoxWrapper = styled.header`
     background: ${colors.yellow};
     padding: 0.5em;
+    width: 100%;
+    margin-bottom: 1em;
     .nav-inner {
         width: 100%;
-        max-width: 1200px;
+        max-width: 800px;
         margin: auto;
         display: flex;
         justify-content: center;
@@ -19,13 +21,13 @@ const SearchBoxWrapper = styled.header`
         margin-right: 1em;
     }
     .input-bar {
-        width: 60%;
+        width: 100%;
         height: 39px;
         display: flex;
         input {
             width: 100%;
             height: 39px;
-            padding: 1em;
+            padding: 0 1em;
             font-size: 1em;
             border: none;
             border-top-left-radius: 3px;
@@ -60,22 +62,31 @@ export default class extends React.Component {
     };
 
     search = () => {
-        alert(this.state.inputValue);
+        const { inputValue } = this.state;
+        if (inputValue) {
+            window.location.replace(`/items?search=${inputValue}`)
+        }
     };
 
     render() {
         return (
             <SearchBoxWrapper>
                 <div className="nav-inner">
-                    <img
-                        className="logo"
-                        src="../static/images/Logo_ML@2x.png"
-                        alt="Mercado Libre"
-                    />
+                    <a href="/">
+                        <img
+                            className="logo"
+                            src="../static/images/Logo_ML@2x.png"
+                            alt="Ir a Home"
+                        />
+                    </a>
+
                     <div className="input-bar">
                         <input
                             placeholder="Nunca dejes de buscar"
                             type="text"
+                            onKeyPress={(e) => {
+                                if (e.charCode === 13) this.search()
+                            }}
                             onChange={this.onInputChange}
                             value={this.state.inputValue}
                         />

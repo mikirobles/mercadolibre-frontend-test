@@ -13,6 +13,18 @@ app.prepare().then(() => {
 
     server.use('/api', api);
 
+    server.get('/items', (req, res) => {
+        if (req.query.search) {
+            return app.render(req, res, '/search')
+        } else {
+            next()
+        }
+    })
+
+    server.get('/items/:id', (req, res) => {
+        return app.render(req, res, '/item')
+    })
+
     server.get('*', (req, res) => {
         return handle(req, res);
     });

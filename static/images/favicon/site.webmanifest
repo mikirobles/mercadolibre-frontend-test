@@ -1,0 +1,14 @@
+{
+    "name": "Mercado Libre",
+    "short_name": "Mercado Libre",
+    "icons": [
+        {
+            "src": "/static/images/favicon/android-chrome-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#fff857",
+    "background_color": "#fff857",
+    "display": "standalone"
+}

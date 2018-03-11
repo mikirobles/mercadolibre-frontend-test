@@ -26,14 +26,13 @@ export default class MyDocument extends Document {
                     <style
                         dangerouslySetInnerHTML={{
                             __html:
-                                '* {margin:0;padding:0;-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;} div, input, button{box-sizing:border-box}',
+                                '* {margin:0;padding:0;-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;box-sizing:border-box; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";}',
                         }}
                     />
                     {this.props.styleTags}
-
                     <link
                         rel="apple-touch-icon"
-                        sizes="180x180"
+                        sizes="76x76"
                         href="/static/images/favicon/apple-touch-icon.png"
                     />
                     <link
@@ -50,28 +49,28 @@ export default class MyDocument extends Document {
                     />
                     <link
                         rel="manifest"
-                        href="/static/images/favicon/manifest.json"
+                        href="/static/images/favicon/site.webmanifest"
                     />
                     <link
                         rel="mask-icon"
                         href="/static/images/favicon/safari-pinned-tab.svg"
-                        color="#ff6b00"
+                        color="#a7ab00"
                     />
                     <link
                         rel="shortcut icon"
                         href="/static/images/favicon/favicon.ico"
                     />
+                    <meta name="msapplication-TileColor" content="#ffc40d" />
                     <meta
                         name="msapplication-config"
                         content="/static/images/favicon/browserconfig.xml"
                     />
-                    <meta name="theme-color" content="#ffffff" />
+                    <meta name="theme-color" content="#fff857" />
 
                     <meta name="format-detection" content="telephone=no" />
                     <meta httpEquiv="x-rim-auto-match" content="none" />
 
                     <meta name="mobile-web-app-capable" content="yes" />
-                    <meta name="theme-color" content="#81489c" />
 
                     <meta name="apple-mobile-web-app-capable" content="yes" />
                     <meta
@@ -83,21 +82,13 @@ export default class MyDocument extends Document {
                         content="Mercado Libre Test"
                     />
                     <meta
-                        name="msapplication-TileImage"
-                        content="Mercado Libre Test"
-                    />
-                    <meta name="msapplication-TileColor" content="#000000" />
-                    <meta
                         name="description"
                         content="Test de Front End hecho para Mercado Libre"
                     />
                     <meta name="keywords" content="mercado libre, test" />
                     <meta name="author" content="http://micaelrobles.com" />
                     <meta property="fb:app_id" content="" />
-                    <meta
-                        property="og:title"
-                        content="Mercado Libre Test"
-                    />
+                    <meta property="og:title" content="Mercado Libre Test" />
                     <meta
                         property="og:site_name"
                         content="Mercado Libre Test"
@@ -116,11 +107,6 @@ export default class MyDocument extends Document {
                         name="twitter:creator"
                         content="http://micaelrobles.com"
                     />
-                    <meta
-                        name="msapplication-config"
-                        content="/static/images/icons/browserconfig.xml"
-                    />
-                    <meta name="theme-color" content="#81489c" />
                 </Head>
 
                 <body>

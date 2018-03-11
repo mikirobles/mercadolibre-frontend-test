@@ -5,6 +5,11 @@ const author = {
     lastname: 'Robles',
 };
 
+const getLongest = (...args) =>
+    args.reduce((a, b) => {
+        return String(a).length > String(b).length ? a : b;
+    });
+
 const getSearchItemsUrl = ({ query }) =>
     `https://api.mercadolibre.com/sites/MLA/search?q=${query}`;
 const getItemDetailsUrl = ({ itemId }) =>
@@ -71,10 +76,10 @@ const getItem = async ({ itemId }) => {
         ]);
 
         const details = detailsResponse.data;
-        const description = descriptionResponse.data.text;
-
+        const description = getLongest(descriptionResponse.data.text, descriptionResponse.data['plain_text']);
         const item = {
             ...formatItem(details),
+            picture: details.pictures[0] ? details.pictures[0].url : '',
             sold_quantity: details['sold_quantity'],
             description,
         };

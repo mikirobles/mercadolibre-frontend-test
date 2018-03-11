@@ -9,7 +9,7 @@ const {
 // ENDPOINTS
 routes.get('/', async (req, res) => {
     res.json(
-        await searchItems({ query: req.query['q'] ? req.query['q'] : '' }),
+        await searchItems({ query: req.query['q'] || '' }),
     );
 });
 
