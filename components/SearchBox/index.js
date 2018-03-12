@@ -8,6 +8,7 @@ const { colors } = styleConstants;
 
 const SearchBoxWrapper = styled.header`
     background: ${colors.yellow};
+    box-shadow: 0 0 1px #00000024;
     padding: 0.5em;
     width: 100%;
     .nav-inner {
@@ -25,6 +26,7 @@ const SearchBoxWrapper = styled.header`
         width: 100%;
         height: 39px;
         display: flex;
+        box-shadow: 0px 1.5px 1px #00000024;
         input {
             width: 100%;
             height: 39px;

@@ -5,7 +5,7 @@ const { breakpoints } = styleConstants;
 
 const CategoryTreeWrapper = styled.div`
     color: gray;
-    margin-bottom: 1em;
+    margin: 0 1em 1em 1em;
     font-size: 0.6em;
     span {
         &:not(:last-child):after {
@@ -18,6 +18,7 @@ const CategoryTreeWrapper = styled.div`
     }
     @media ${breakpoints.tabletPort} {
         font-size: 0.8em;
+        margin: 0 0 1em 0;
     }
 `;
 

@@ -43,8 +43,10 @@ const ItemDetailWrapper = styled.div`
             padding: 1em 3em;
             border-radius: 5px;
             cursor: pointer;
+            box-shadow: 0px 1.5px 1px #00000024;
             &:hover {
                 background: ${styleConstants.colors.lightBlue};
+                box-shadow: none;
             }
         }
     }

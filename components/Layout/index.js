@@ -4,7 +4,7 @@ import ErrorMessage from 'components/ErrorMessage';
 import { styleConstants } from 'helpers/index';
 import search from "../../pages/search";
 
-const { colors } = styleConstants;
+const { colors, breakpoints } = styleConstants;
 
 const LayoutWrapper = styled.div`
     background: ${colors.lightGray};
@@ -19,7 +19,12 @@ const LayoutWrapper = styled.div`
         box-sizing: border-box;
         width: 100%;
         max-width: 800px;
+        padding: 1em 0;
+    }
+    @media ${breakpoints.tabletPort} {
+      article {
         padding: 1em;
+      }
     }
 `;
 

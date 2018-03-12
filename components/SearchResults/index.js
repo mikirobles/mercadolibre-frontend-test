@@ -48,7 +48,6 @@ const SearchResultsWrapper = styled.ul`
             width: 100%;
             margin: 0.5em;
             .price {
-                //margin: 0.5em 0 0.2em 0;
                 font-size: 2em;
                 font-weight: 600;
                 margin-bottom: 0.3em;
@@ -84,6 +83,11 @@ const SearchResultsWrapper = styled.ul`
         font-size: 1em;
         .product {
             align-items: left;
+            .img-container {
+              width: 160px;
+              min-width: 160px;
+              height: 160px;
+            }
             .details {
                 margin: 0.5em 0 0 1em;
                 .price {
