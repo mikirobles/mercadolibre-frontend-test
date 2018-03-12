@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const author = {
     name: 'Micael',
-    lastname: 'Robles',
+    lastname: 'Robles'
 };
 
 const getSearchItemsUrl = ({ query }) =>
@@ -23,11 +23,11 @@ const formatItem = rawData => ({
         decimals:
             String(rawData.price).split('.').length === 2
                 ? Number(String(rawData.price).split('.')[1])
-                : 0,
+                : 0
     },
     picture: rawData.thumbnail,
     condition: rawData.condition,
-    free_shipping: rawData.shipping['free_shipping'],
+    free_shipping: rawData.shipping['free_shipping']
 });
 
 const searchItems = async ({ query }) => {
@@ -37,15 +37,15 @@ const searchItems = async ({ query }) => {
 
         let categories = [];
         const categoryObj = resultsData.filters.find(
-            filter => filter.id === 'category',
+            filter => filter.id === 'category'
         );
         if (categoryObj) {
             categories = flatten(
                 categoryObj.values.map(category =>
                     category['path_from_root'].map(
-                        rootCategory => rootCategory.name,
-                    ),
-                ),
+                        rootCategory => rootCategory.name
+                    )
+                )
             );
         }
         const items = resultsData.results.slice(0, 4).map(formatItem);
@@ -53,27 +53,40 @@ const searchItems = async ({ query }) => {
         return {
             author,
             categories,
-            items,
+            items
         };
     } catch (err) {
         console.error(err);
         return {
-            error: err,
+            error: err
         };
     }
 };
 
 const getItem = async ({ itemId }) => {
     try {
-        const [detailsResponse, descriptionResponse] = await Promise.all([
-            axios.get(getItemDetailsUrl({ itemId })),
-            axios.get(getItemDescriptionUrl({ itemId })),
-        ]);
+        const details = (await axios.get(getItemDetailsUrl({ itemId }))).data;
+        let descriptionData;
 
-        const details = detailsResponse.data;
-        const categoriesResponse = await axios.get(`https://api.mercadolibre.com/categories/${details['category_id']}`);
-        const categories = categoriesResponse.data['path_from_root'].map(category => category.name);
-        const description = descriptionResponse.data['plain_text'] || descriptionResponse.data.text;
+        await axios
+            .get(getItemDescriptionUrl({ itemId }))
+            .then(response => {
+                descriptionData = response.data;
+            })
+            .catch(console.error);
+
+        const categoriesResponse = await axios.get(
+            `https://api.mercadolibre.com/categories/${details['category_id']}`
+        );
+        const categories = categoriesResponse.data['path_from_root'].map(
+            category => category.name
+        );
+
+        const description = descriptionData
+            ? descriptionData['plain_text'] ||
+              descriptionData.text
+            : null;
+
         const item = {
             ...formatItem(details),
             picture: details.pictures[0] ? details.pictures[0].url : '',
@@ -84,16 +97,16 @@ const getItem = async ({ itemId }) => {
 
         return {
             author,
-            item,
+            item
         };
     } catch (err) {
         return {
-            error: err.response.data.message,
+            error: err.response ? err.response.data.message : err
         };
     }
 };
 
 module.exports = {
     searchItems,
-    getItem,
+    getItem
 };
