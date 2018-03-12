@@ -11,12 +11,6 @@ const api = require('./api');
 app.prepare().then(() => {
     const server = express();
 
-    server.use(
-        express.static('/static/images', {
-            maxage: '3600000',
-        }),
-    );
-
     server.use('/api', api);
 
     server.get('/items', (req, res) => {

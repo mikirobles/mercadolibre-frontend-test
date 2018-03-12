@@ -56,17 +56,21 @@ export default class extends React.Component {
         this.state = {
             inputValue: this.props.initialValue || '',
             canSearch: false,
+            loading: false
         };
     }
 
     onInputChange = e => {
         this.setState({
             inputValue: e.target.value,
-            canSearch: !!e.target.value,
+            canSearch: !!e.target.value
         });
     };
 
     search = () => {
+        this.setState({
+            loading: true
+        });
         const { inputValue } = this.state;
         if (inputValue) {
             Router.push(`/items?search=${inputValue}`);
@@ -95,10 +99,17 @@ export default class extends React.Component {
                             value={this.state.inputValue}
                         />
                         <button onClick={this.search}>
-                            <img
-                                src="https://tocklify.sirv.com/mercadolibre/ic_Search%402x.png"
-                                alt="Buscar"
-                            />
+                            {!this.state.loading ? (
+                                <img
+                                    src="https://tocklify.sirv.com/mercadolibre/ic_Search%402x.png"
+                                    alt="Buscar"
+                                />
+                            ) : (
+                                <img
+                                    src="https://tocklify.sirv.com/mercadolibre/tail-spin.svg"
+                                    alt="Cargando..."
+                                />
+                            )}
                         </button>
                     </div>
                 </div>
