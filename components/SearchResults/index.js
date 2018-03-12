@@ -8,7 +8,7 @@ const SearchResultsWrapper = styled.ul`
     width: 100%;
     max-width: 800px;
     margin: auto;
-    font-size: 14px;
+    font-size: 0.7em;
     a {
         color: inherit;
         text-decoration: none;
@@ -18,7 +18,6 @@ const SearchResultsWrapper = styled.ul`
     }
     .product {
         background: white;
-        margin: 0 1em;
         padding: 1em;
         display: flex;
         justify-content: flex-start;
@@ -38,7 +37,7 @@ const SearchResultsWrapper = styled.ul`
         .img-container {
             width: 30%;
             height: 100%;
-            margin: 0.5em;
+            margin: 1em;
             img {
                 width: 100%;
                 height: 100%;
@@ -77,17 +76,18 @@ const SearchResultsWrapper = styled.ul`
             }
             h1 {
                 font-weight: 200;
-                letter-spacing: 1px;
+                letter-spacing: 0.5px;
             }
         }
     }
     @media ${breakpoints.tabletPort} {
+        font-size: 1em;
         .product {
             align-items: left;
             .details {
                 margin: 0.5em 0 0 1em;
                 .price {
-                    margin: 1em 0 0.5em 0;
+                    margin: 0.5em 0;
                 }
             }
         }

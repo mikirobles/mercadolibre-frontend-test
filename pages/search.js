@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from 'components/Layout';
 import SearchResults from 'components/SearchResults';
+import CategoryTree from 'components/CategoryTree';
 import { formattingHelpers, apiHelpers } from 'helpers';
 const { handleProps, getBaseApiUrl } = apiHelpers;
 const { capitalize } = formattingHelpers;
@@ -27,14 +28,19 @@ export default class extends React.Component {
         }
     }
     render() {
+        const { categories, items } = this.props.payload;
         return (
-            <Layout searchValue={this.props.searchInput} error={this.props.error}>
+            <Layout
+                searchValue={this.props.searchInput}
+                error={this.props.error}
+            >
                 <Head>
                     <title>{`${capitalize(
                         this.props.searchInput,
                     )} en Mercado Libre`}</title>
                 </Head>
-                <SearchResults results={this.props.payload.items} />
+                {categories[0] ? CategoryTree({ categories }) : null}
+                <SearchResults results={items} />
             </Layout>
         );
     }

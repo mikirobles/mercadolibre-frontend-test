@@ -10,7 +10,6 @@ const SearchBoxWrapper = styled.header`
     background: ${colors.yellow};
     padding: 0.5em;
     width: 100%;
-    margin-bottom: 1em;
     .nav-inner {
         width: 100%;
         max-width: 800px;
@@ -76,16 +75,13 @@ export default class extends React.Component {
         return (
             <SearchBoxWrapper>
                 <div className="nav-inner">
-                    <Link href="/">
-                        <a>
-                            <img
-                                className="logo"
-                                src="https://tocklify.sirv.com/mercadolibre/Logo_ML%402x.png"
-                                alt="Ir a Home"
-                            />
-                        </a>
-                    </Link>
-
+                    <a href="/">
+                        <img
+                            className="logo"
+                            src="https://tocklify.sirv.com/mercadolibre/Logo_ML%402x.png"
+                            alt="Ir a Home"
+                        />
+                    </a>
                     <div className="input-bar">
                         <input
                             placeholder="Nunca dejes de buscar"

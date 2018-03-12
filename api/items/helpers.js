@@ -5,11 +5,6 @@ const author = {
     lastname: 'Robles',
 };
 
-const getLongest = (...args) =>
-    args.reduce((a, b) => {
-        return String(a).length > String(b).length ? a : b;
-    });
-
 const getSearchItemsUrl = ({ query }) =>
     `https://api.mercadolibre.com/sites/MLA/search?q=${encodeURI(query)}`;
 const getItemDetailsUrl = ({ itemId }) =>
@@ -76,12 +71,15 @@ const getItem = async ({ itemId }) => {
         ]);
 
         const details = detailsResponse.data;
-        const description = getLongest(descriptionResponse.data.text, descriptionResponse.data['plain_text']);
+        const categoriesResponse = await axios.get(`https://api.mercadolibre.com/categories/${details['category_id']}`);
+        const categories = categoriesResponse.data['path_from_root'].map(category => category.name);
+        const description = descriptionResponse.data['plain_text'] || descriptionResponse.data.text;
         const item = {
             ...formatItem(details),
             picture: details.pictures[0] ? details.pictures[0].url : '',
             sold_quantity: details['sold_quantity'],
             description,
+            categories
         };
 
         return {

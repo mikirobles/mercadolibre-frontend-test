@@ -18,7 +18,7 @@ const LayoutWrapper = styled.div`
         flex-direction: column;
         box-sizing: border-box;
         width: 100%;
-        max-width: 1200px;
+        max-width: 800px;
         padding: 1em;
     }
 `;
